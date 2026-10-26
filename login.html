@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>LojaQA - Login</title>
+    <style>
+        .error { color: red; display: none; }
+        .status { color: green; display: none; }
+    </style>
+</head>
+<body>
+    <h2>Login LojaQA</h2>
+    <form id="loginForm">
+        <input type="email" id="email" placeholder="E-mail"><br><br>
+        <input type="password" id="password" placeholder="Senha"><br><br>
+        <button type="submit" id="loginBtn" disabled>Entrar</button>
+    </form>
+    
+    <div id="errorMessage" class="error">Credenciais inválidas</div>
+    <div id="statusMessage" class="status">Sucesso</div>
+
+    <script>
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        const errorMessage = document.getElementById('errorMessage');
+
+        function checkInputs() {
+            if (email.value.trim() !== '' && password.value.trim() !== '') {
+                loginBtn.removeAttribute('disabled');
+            } else {
+                loginBtn.setAttribute('disabled', 'true');
+            }
+        }
+
+        email.addEventListener('input', checkInputs);
+        password.addEventListener('input', checkInputs);
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if ((email.value === 'user@system.com' && password.value === 'senha12345') ||
+                (email.value === 'admin@system.com' && password.value === 'adminSenha123')) {
+                window.location.href = 'painel.html';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
